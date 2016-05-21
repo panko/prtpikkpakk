@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import hu.unideb.inf.prt.pikkpakk.model.Board?>
+
+
+<HBox alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.prt.pikkpakk.controllers.ViewController">
+         <children>
+			<Board fx:id="board" alignment="CENTER" maxHeight="300.0" maxWidth="300.0">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="30.0" fillWidth="true" halignment="CENTER"/>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="30.0" fillWidth="true" halignment="CENTER"/>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="30.0" fillWidth="true" halignment="CENTER"/>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="30.0" fillWidth="true" halignment="CENTER"/>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="30.0" fillWidth="true" halignment="CENTER"/>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="30.0" fillWidth="true" halignment="CENTER"/>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="30.0" fillWidth="true" halignment="CENTER"/>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="30.0" fillWidth="true" halignment="CENTER"/>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="30.0" fillWidth="true" halignment="CENTER"/>
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="ALWAYS" fillHeight="true" valignment="CENTER"/>
+                  <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="ALWAYS" fillHeight="true" valignment="CENTER"/>
+                  <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="ALWAYS" fillHeight="true" valignment="CENTER"/>
+                  <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="ALWAYS" fillHeight="true" valignment="CENTER"/>
+                  <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="ALWAYS" fillHeight="true" valignment="CENTER"/>
+                  <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="ALWAYS" fillHeight="true" valignment="CENTER"/>
+                  <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="ALWAYS" fillHeight="true" valignment="CENTER"/>
+                  <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="ALWAYS" fillHeight="true" valignment="CENTER"/>
+                  <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="ALWAYS" fillHeight="true" valignment="CENTER"/>
+              </rowConstraints>
+            </Board>
+         </children>
+      </HBox>
