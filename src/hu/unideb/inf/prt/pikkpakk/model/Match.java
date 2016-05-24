@@ -8,4 +8,7 @@ public class Match {
 	
 	Player winner;
 
+	public Match() {
+		
+	}
 }
