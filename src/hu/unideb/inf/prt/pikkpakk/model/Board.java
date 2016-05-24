@@ -1,6 +1,8 @@
 package hu.unideb.inf.prt.pikkpakk.model;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -23,17 +25,13 @@ public class Board extends GridPane {
 		this.setGridLinesVisible(true);
 		
 		this.addEventFilter(MouseEvent.MOUSE_CLICKED,(event) -> {
-			int clickColNum = (int)event.getX()/33;
-			int clickRowNum = (int)event.getY()/33;
+			int clickRowNum = (int)event.getX()/30;
+			int clickColNum = (int)event.getY()/30;
+			System.out.printf("%d %d\n", clickColNum, clickRowNum);
 			for (Node node : this.getChildren()) {
-				if(node instanceof Polygon){
-					if(GridPane.getColumnIndex(node) == clickColNum && GridPane.getRowIndex(node) == clickRowNum){
-						if(clickRowNum == 0 || clickRowNum == 10){
-							pushNodesHorizontically(clickColNum, clickRowNum);
-						}
-						else if (clickColNum == 0 || clickColNum == 10) {
-							pushNodesVertically(clickColNum, clickRowNum);
-						}
+				if(node instanceof Arrow){
+					if(!((Arrow) node).getIsClicked() && GridPane.getColumnIndex(node) == clickColNum && GridPane.getRowIndex(node) == clickRowNum){
+						((Arrow) node).click(this);
 					}
 					
 				}
@@ -102,29 +100,32 @@ public class Board extends GridPane {
 	}
 	
 	private void pushNodesVertically(int col, int row){
-	     ArrayList<Node> childrenInRow = new ArrayList<Node>();
-	     ObservableList<Node> children = this.getChildren();
-	     for (int i = 0; i < children.size(); ++i)
-	          if (GridPane.getRowIndex(children.get(i)) == index)
-	          {
-	               childrenInRow.add(children.get(i));
-	               children.remove(i);
-	          }
-	     gridPane.addRow(index, toReplace);
-	     //do something with childrenInRow if needed.
+
+	    
 	}
 	
 	private void pushNodesHorizontically(int col, int row){
-	     ArrayList<Node> childrenInRow = new ArrayList<Node>();
-	     ObservableList<Node> children = this.getChildren();
-	     for (int i = 0; i < children.size(); ++i)
-	          if (GridPane.getRowIndex(children.get(i)) == index)
-	          {
-	               childrenInRow.add(children.get(i));
-	               children.remove(i);
-	          }
-	     gridPane.addRow(index, toReplace);
-	     //do something with childrenInRow if needed.
+		
+	     //ArrayList<Node> childrenInRow = new ArrayList<Node>();
+	     ObservableList<Node> childrens = this.getChildren();
+	     
+		if (row == 10){//balra tolok
+			
+			for (int i = 1; i < childrens.size(); ++i){
+				if (childrens.get(i) instanceof Circle && GridPane.getRowIndex(childrens.get(i)) == col){
+					if((GridPane.getColumnIndex(childrens.get(i)) - 1) == 0){
+						break;
+						
+					}
+					GridPane.setColumnIndex(childrens.get(i), GridPane.getColumnIndex(childrens.get(i)) - 1);
+					
+				}
+			}
+		}
+		if(row == 0){
+			
+		}
+
 	}
 
 	private void fillWithArrows() {
@@ -158,6 +159,15 @@ public class Board extends GridPane {
 		
 	}
 	
-	
+	public Arrow getArrowByCoords(int col, int row){
+		Arrow arrow = (Arrow) this.getChildren()
+				.stream()
+				.filter(n -> n instanceof Arrow && col == ((Arrow) n).getColNum() && row == ((Arrow) n).getRowNum())
+				.reduce((a, b) -> {
+		            throw new IllegalStateException("Multiple elements: " + a + ", " + b);
+		        })
+		        .get();
+		return arrow;
+	}
 
 }
