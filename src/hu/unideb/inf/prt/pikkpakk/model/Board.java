@@ -1,8 +1,11 @@
 package hu.unideb.inf.prt.pikkpakk.model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -30,7 +33,7 @@ public class Board extends GridPane {
 			System.out.printf("%d %d\n", clickColNum, clickRowNum);
 			for (Node node : this.getChildren()) {
 				if(node instanceof Arrow){
-					if(!((Arrow) node).getIsClicked() && GridPane.getColumnIndex(node) == clickColNum && GridPane.getRowIndex(node) == clickRowNum){
+					if(((Arrow) node).isClickable(this) && GridPane.getColumnIndex(node) == clickColNum && GridPane.getRowIndex(node) == clickRowNum){
 						((Arrow) node).click(this);
 					}
 					
@@ -99,34 +102,7 @@ public class Board extends GridPane {
 		fillWithArrows();
 	}
 	
-	private void pushNodesVertically(int col, int row){
-
-	    
-	}
 	
-	private void pushNodesHorizontically(int col, int row){
-		
-	     //ArrayList<Node> childrenInRow = new ArrayList<Node>();
-	     ObservableList<Node> childrens = this.getChildren();
-	     
-		if (row == 10){//balra tolok
-			
-			for (int i = 1; i < childrens.size(); ++i){
-				if (childrens.get(i) instanceof Circle && GridPane.getRowIndex(childrens.get(i)) == col){
-					if((GridPane.getColumnIndex(childrens.get(i)) - 1) == 0){
-						break;
-						
-					}
-					GridPane.setColumnIndex(childrens.get(i), GridPane.getColumnIndex(childrens.get(i)) - 1);
-					
-				}
-			}
-		}
-		if(row == 0){
-			
-		}
-
-	}
 
 	private void fillWithArrows() {
 		final int gridPaneSize = 8+1; 
@@ -168,6 +144,20 @@ public class Board extends GridPane {
 		        })
 		        .get();
 		return arrow;
+	}
+	public List<Node> getNodeByCoords(int col, int row)  {
+		List<Node> nodes = new ArrayList<Node>();
+		ObservableList<Node> childrens = this.getChildren();
+		for (int i = 1; i < childrens.size(); i++) {
+			if (col == GridPane.getRowIndex(childrens.get(i)) && row == GridPane.getColumnIndex(childrens.get(i))) {
+				nodes.add(childrens.get(i));
+			}
+			
+		}
+
+		System.out.println(nodes);
+		
+		return nodes;
 	}
 
 }

@@ -1,4 +1,7 @@
 package hu.unideb.inf.prt.pikkpakk.model;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.BooleanPropertyBase;
 import javafx.collections.ObservableList;
@@ -9,11 +12,11 @@ import javafx.scene.shape.Polygon;
 
 public class Arrow extends Polygon{
 	
-	private boolean isClicked;
+
 
 	public Arrow() {
 		super();
-		isClicked = false;
+
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -36,13 +39,13 @@ public class Arrow extends Polygon{
 				System.out.printf("col:%d row:%d\n",GridPane.getColumnIndex(node),GridPane.getRowIndex(node));
 				if (this.getColNum() == 10) {
 					GridPane.setRowIndex(node, GridPane.getRowIndex(node) - 1);
-					this.setIsClicked(true);
-					board.getArrowByCoords(getRowNum(), 0).setIsClicked(false);
+					
+					
 					
 				} else if (this.getColNum() == 0) {
 					GridPane.setRowIndex(node, GridPane.getRowIndex(node) + 1);
-					this.setIsClicked(true);
-					board.getArrowByCoords(getRowNum(), 10).setIsClicked(false);
+					
+					
 				}
 				
 			}
@@ -50,24 +53,55 @@ public class Arrow extends Polygon{
 				System.out.printf("2col:%d row:%d\n",GridPane.getColumnIndex(node),GridPane.getRowIndex(node));
 				if (this.getRowNum() == 10) {
 					GridPane.setColumnIndex(node, GridPane.getColumnIndex(node) - 1);
-					this.setIsClicked(true);
-					board.getArrowByCoords(getColNum(), 0).setIsClicked(false);
+					
+					
 					
 				} else if (this.getRowNum() == 0) {
 					GridPane.setColumnIndex(node, GridPane.getColumnIndex(node) + 1);
-					this.setIsClicked(true);
-					board.getArrowByCoords(getColNum(), 10).setIsClicked(false);
+					
+					
 				}
 			}
 		}
 	}
 
-	public boolean getIsClicked() {
-		return isClicked;
-	}
-
-	public void setIsClicked(boolean isClicked) {
-		this.isClicked = isClicked;
+	public boolean isClickable(Board board){
+		
+		if(this.getColNum() == 0){
+			
+				if(board.getNodeByCoords(this.getColNum()+9, this.getRowNum()).isEmpty()){
+					return true;
+				}else{
+					return false;
+				}
+			
+			
+			
+		}
+		if(this.getColNum() == 10){
+			
+			if(board.getNodeByCoords(this.getColNum()-9, this.getRowNum()).isEmpty()){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		if(this.getRowNum() == 0){
+			if(board.getNodeByCoords(this.getColNum(), this.getRowNum()+9).isEmpty()){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		if(this.getRowNum() == 10){
+			if(board.getNodeByCoords(this.getColNum(), this.getRowNum()-9).isEmpty()){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		return false;
+		
 	}
 
 
